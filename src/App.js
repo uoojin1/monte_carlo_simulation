@@ -59,7 +59,7 @@ class App extends Component {
     this.setState({running: false, paused: true})
   }
   resetEstimation = e => {
-    this.setState({running: false, paused: false, interval: 1, inside_count: 0, outside_count: 0, timeout: 60, expression_is_valid: true, function_is_a_constant: false})
+    this.setState({running: false, paused: false, interval: 1, inside_count: 0, outside_count: 0, timeout: 60, function_domain_is_valid:true, expression_is_valid: true, function_is_a_constant: false})
     if (this.state.estimating_pi) {
       this.w.postMessage({message: 'reset'})
     } else {
@@ -91,7 +91,7 @@ class App extends Component {
     return new Promise((res, rej) => {
       try {
         math.parse(fullExpression).eval({x: 5}) // testing to see if its a proper function of x
-        this.setState({expression_is_valid: true})
+        this.setState({expression_is_valid: true, function_domain_is_valid: true})
         if (isNaN(expr)) { // is not a constant function ex) y=3x
           res()
         } else { // is a constant function ex) y=3
